@@ -35,21 +35,24 @@ prevent.addEventListener("submit", (e) =>{
   e.preventDefault()
 })
 
+//Função responsável por limpar o campo de pesquisa.
+function limpa(){
+  document.getElementById('NPE').value=''; // Limpa o campo de pesquisa.
+}
+
 //Função responsavél por verificar se o Estado digitado pelo usuario é valido, e retornar as informações caso seja, e caso não seja, ira retornará uma mensagem de erro.
 function validaUF() {
   uf = document.getElementById("NPE").value;
-  var nUf = uf.toUpperCase();		
-  var sUf = removerAcentos(nUf);
-  var tUf = sUf.trim();
+  adaptar(uf);
   var ufValida = false;			
   var x = 0;
   const busca = document.querySelector('p');
   const num_estados	= 27;		
   while (x<num_estados){
-    if (tUf === UFs[x].ID){
+    if (rUf === UFs[x].ID){
       swal("Formulario Preenchido", "Estado encontrado!", "success");
       var estado = (UFs[x].nome_por_extenso + ' | ' + UFs[x].sigla + ' | ' + UFs[x].capital + ' | ' + UFs[x].regiao);
-      document.getElementById('NPE').value=''; // Limpa o campo de pesquisa.
+      limpa()
       busca.innerHTML = estado+'<br>'+'<p class="exemplo">(Estado | UF | Capital | Região)</p>'
       ufValida == true;				
       break;
@@ -60,17 +63,21 @@ function validaUF() {
     }
     if (x === 27 && ufValida == false){
       swal("Por Favor!", "Insira um Estado Valido!", "error");
+      limpa()
     }
   }
 }
 
-/**
- * Remove acentos de caracteres
- * @param  {String} stringComAcento [string que contem os acentos]
- * @return {String}                 [string sem acentos]
- */
-function removerAcentos( newStringComAcento ) {
-  var string = newStringComAcento;
+//Função responsavél por pega a variavel digitada pelo usuario, colocar em maiusculo, remover os acentos e retirar espaços desnecessarios..
+function adaptar(uf){
+  var uf = uf;
+  var uUf = uf.toUpperCase();		
+  rUf = removerAcentos(uUf);
+}
+
+//Função responsavél por remover os acentos do estado digitado.
+function removerAcentos(StringComAcento) {
+  var string = StringComAcento;
   var mapaAcentosHex = {
     a : /[\xE0-\xE6]/g,
     A : /[\xC0-\xC6]/g,
