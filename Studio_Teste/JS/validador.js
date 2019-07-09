@@ -47,7 +47,7 @@ function validaUF() {
   var ufValida = false;			
   var x = 0;
   const busca = document.querySelector('p');
-  const num_estados	= 27;		
+  const num_estados = 27;		
   while (x<num_estados){
     if (rUf === UFs[x].ID){
       swal("Formulario Preenchido", "Estado encontrado!", "success");
