@@ -18,7 +18,7 @@ header{
     width: 100vw;
 }
 
-header p {
+.paragrafo{
     font-size: 50px;
     margin-top:20px;
 }
